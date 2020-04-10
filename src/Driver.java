@@ -14,36 +14,19 @@ public class Driver {
             BufferedReader br = new BufferedReader(new FileReader(file));
       
             String st;
-            System.out.println("hellow world");
+            System.out.println("Reading in list of cities...");
             while ((st = br.readLine()) != null){
                   BST.insert(st);
                   System.out.println(st );
             }
-           
-            // add elements to the array list
-           /*
-            BST.insert("A");
-            BST.insert("E");
-            BST.insert("B");
-            BST.insert("D");
-            BST.insert("F");
-      */
             // Use iterator to display contents of al
-            System.out.print("Contents of BST: ");
-            Iterator itr = BST.iterator();
+            Iterator itr = BST.preorder_iterator();
       
             while(itr.hasNext()) {
                   Object element = itr.next();
-                  System.out.print(element + " ");
+                  System.out.print(element + "*** ");
             }
             System.out.println();
       
       }
-      
-      
-      private static void preorder(BinarySearchTree.Node x) {
-            if (x == null) return;
-            System.out.println(x.item);
-            preorder(x.left);
-            preorder(x.right); }
 }
