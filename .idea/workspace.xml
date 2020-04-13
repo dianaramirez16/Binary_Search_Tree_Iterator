@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="545546d1-b85f-44a5-b1f8-39736d174886" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BinarySearchTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Iterator/BinarySearchTree$Preorder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterator/BinarySearchTree$Preorder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Iterator/BinarySearchTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterator/BinarySearchTree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Iterator/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Iterator/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BinarySearchTree.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Iterative.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +88,8 @@
       <updated>1586481899999</updated>
       <workItem from="1586481906623" duration="13335000" />
       <workItem from="1586500472821" duration="65000" />
-      <workItem from="1586500706187" duration="435000" />
+      <workItem from="1586500706187" duration="6486000" />
+      <workItem from="1586756513328" duration="8304000" />
     </task>
     <servers />
   </component>
