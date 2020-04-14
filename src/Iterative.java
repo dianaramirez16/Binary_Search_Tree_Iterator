@@ -68,7 +68,7 @@ public class Iterative {
                         x++;
                         if(containsIgnoreCase(temp,city)){
                               mulResults++;
-                              System.out.print("Found city " + element + " in position " +(19-x) + "\n");
+                              System.out.print("YES. Found city " + element + " in position " +(19-x) + "\n");
                               found = true;
                               if (mulResults>1){
                                     System.out.println("multiple results found, please enter the complete city name");
@@ -77,7 +77,7 @@ public class Iterative {
                         
                   }
                   if (!found){
-                        System.out.println("Could not find city.");
+                        System.out.println("NO. Could not find city.");
                   }
                   System.out.println("Would you like to search again?");
                   search = scan.nextLine();
@@ -154,31 +154,6 @@ class BinarySearchTree<Item> {
             }
             return node;
       }
-      
-      private boolean search(Node node, String city) {
-            boolean found = false;
-            int i = 0;
-            char one = node.getData().charAt(i);
-            char two = city.charAt(i);
-            while ((node != null) && !found) {
-                  if (Character.compare(two, one) < 0) // city < node . data
-                        node = node.left;
-                  else if (Character.compare(two, one) > 0) //
-                        node = node.right;
-                  else {
-                        i++;
-                        one = node.getData().charAt(i);
-                        two = city.charAt(i);
-                        if (Character.compare(two, one) == 0) {
-                              found = true;
-                              break;
-                        }
-                  }
-                  found = search(node, city);
-            }
-            return found;
-      }
-      
       private class Preorder implements Iterator<Item> {
             Stack<Node> stack = new Stack<Node>();
             
