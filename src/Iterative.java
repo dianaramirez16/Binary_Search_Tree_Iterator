@@ -34,7 +34,7 @@ public class Iterative {
       
             while(itr.hasNext()) {
                   Object element = itr.next();
-                  System.out.print(element + "\n");
+                  System.out.print(element + " \n");
             }
             System.out.println();
       
@@ -53,6 +53,7 @@ class BinarySearchTree<Item> {
       }
       public class Node {
             Item item;
+            //boolean visited = false;
             //String s = (String) this.item;
             Node left, right;
             
@@ -201,7 +202,10 @@ class BinarySearchTree<Item> {
             Stack<Node> printStack = new Stack<Node>();
             
             public Inorder() {
-                  if (root !=null) stack.push(root);
+                  while (root != null) {
+                        stack.push(root);
+                        root = root.left;
+                  }
                   System.out.println("\nPrinting Inorder Traversal:");
             }
             public void remove() {
@@ -212,22 +216,18 @@ class BinarySearchTree<Item> {
             }
             public Item next() {
                   if (!hasNext()) throw new NoSuchElementException();
-                  Node x = stack.peek();
+                  Node x = stack.pop();
                   Item item = x.item;
-                  //System.out.println("x.item=" + x.item);
+                  //System.out.println("from FIRST pop x=" + x.getData());
                   if (x.right != null) {
-                        stack.push(x.right);
-                        //System.out.println("x.right=" + x.right.getData());
+                        x = x.right;
+                        while (x != null) {
+                              stack.push(x);
+                              x = x.left;
+                              //item = x.item;
+                        }
                   }
-                  if (x.left != null) {
-                        stack.push(x.left);
-                        //next();
-                        //System.out.println("root=" + root.getData());
-                        //System.out.println("x.left=" + x.left.getData());
-                  } else if (x.left == null) {
-                        printStack.pop();
-                  }
-                  return next();
+                  return item;
             }
       }
       /*
