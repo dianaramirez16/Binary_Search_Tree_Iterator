@@ -1,49 +1,53 @@
 import java.io.*;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
 public class Iterative {
       public static void main(String[] args) throws IOException {
             BinarySearchTree<String> BST = new BinarySearchTree<>();
-            
-            //create BST
-            
+         
             //read from file
             File file = new File("city_data.txt");
-      
             BufferedReader br = new BufferedReader(new FileReader(file));
-      
             String st;
             System.out.println("Reading in list of cities...");
             while ((st = br.readLine()) != null){
                   BST.insert(st);
                   //System.out.println(st );
             }
-            // Use iterator to display contents of al
-          /*  Iterator itr = BST.preorder_iterator();
-      
-            while(itr.hasNext()) {
-                  Object element = itr.next();
+            
+            Iterator itr1 = BST.preorder_iterator();
+            while(itr1.hasNext()) {
+                  Object element = itr1.next();
                   System.out.print(element + "\n");
             }
-           */
             
-            Iterator itr = BST.inorder_iterator();
+            Iterator itr2 = BST.inorder_iterator();
+            while(itr2.hasNext()) {
+                  Object element = itr2.next();
+                  System.out.print(element + " \n");
+            }
       
-            while(itr.hasNext()) {
-                  Object element = itr.next();
+            BST = new BinarySearchTree<>();
+      
+            //read from file
+            File file1 = new File("city_data.txt");
+            BufferedReader br1 = new BufferedReader(new FileReader(file1));
+            String st1;
+            //System.out.println("Reading in list of cities...");
+            while ((st1 = br1.readLine()) != null){
+                  BST.insert(st1);
+                  //System.out.println(st );
+            }
+            Iterator itr3 = BST.postorder_iterator();
+            while(itr3.hasNext()) {
+                  Object element = itr3.next();
                   System.out.print(element + " \n");
             }
             System.out.println();
-      
       }
 }
-
-
-//reference for creating bst  https://www.sanfoundry.com/java-program-implement-binary-search-tree/
-
 
 class BinarySearchTree<Item> {
       private Node root;
@@ -63,27 +67,17 @@ class BinarySearchTree<Item> {
             public String getData() {
                   return (String)item;
             }
-            
       }
       
       public Iterator<Item> preorder_iterator() {
             return new Preorder();
       }
-      
-      public Iterator<Item> inorder_iterator() {
-            return new Inorder();
-      }
-      /*
-      public Iterator<Item> postorder_iterator() {
-            return new Postorder();
-      }*/
-      
+      public Iterator<Item> inorder_iterator() { return new Inorder(); }
+      public Iterator<Item> postorder_iterator() { return new Postorder(); }
       //Functions to insert data
       public void insert(String data) {
             root = insert(root, data);
       }
-      
-      
       // Function to insert data recursively
       private Node insert(Node node, String data) {
             
@@ -139,42 +133,14 @@ class BinarySearchTree<Item> {
             }
             return found;
       }
-      
-      // Function for inorder traversal
-      public void inorder() {
-            inorder(root);
-      }
-      
-      private void inorder(Node r) {
-            if (r != null) {
-                  inorder(r.getLeft());
-                  System.out.print(r.getData() + " ");
-                  inorder(r.getRight());
-            }
-      }
-      
-      // Function for postorder traversal
-      public void postorder() {
-            postorder(root);
-      }
-      
-      private void postorder(Node r) {
-            if (r != null) {
-                  postorder(r.getLeft());
-                  postorder(r.getRight());
-                  System.out.print(r.getData() + " ");
-            }
-      }*/
+      */
       
       private class Preorder implements Iterator<Item> {
             Stack<Node> stack = new Stack<Node>();
             
             public Preorder() {
                   if (root != null) stack.push(root);
-                  System.out.println("\nPrinting PreOrder Traversal:");
-            }
-            public void remove() {
-                  // throw exception as before
+                  System.out.println("\nPrinting Pre-Order Traversal:");
             }
             public boolean hasNext() {
                   return !stack.isEmpty();
@@ -196,7 +162,6 @@ class BinarySearchTree<Item> {
                   return item;
             }
       }
-      
       private class Inorder implements Iterator<Item> {
             Stack<Node> stack = new Stack<Node>();
             Stack<Node> printStack = new Stack<Node>();
@@ -206,10 +171,7 @@ class BinarySearchTree<Item> {
                         stack.push(root);
                         root = root.left;
                   }
-                  System.out.println("\nPrinting Inorder Traversal:");
-            }
-            public void remove() {
-                  // throw exception as before
+                  System.out.println("\nPrinting In-Order Traversal:");
             }
             public boolean hasNext() {
                   return !stack.isEmpty();
@@ -230,33 +192,29 @@ class BinarySearchTree<Item> {
                   return item;
             }
       }
-      /*
       private class Postorder implements Iterator<Item> {
             Stack<Node> stack = new Stack<Node>();
+            Stack<Node> printStack = new Stack<Node>();
+            Stack<Node> finalStack = new Stack<Node>();
             
             public Postorder() {
                   if (root != null) stack.push(root);
-                  System.out.println("\nPrinting Postorder Traversal:");
+                  System.out.println("\nPrinting Post-Order Traversal:");
             }
-            
-            public void remove() {
-                  // throw exception as before
-            }
-            
             public boolean hasNext() {
                   return !stack.isEmpty();
             }
             
             public Item next() {
-                  if (!hasNext()) throw new NoSuchElementException();
                   Node x = stack.pop();
                   Item item = x.item;
-                  if (x.right != null)
-                        stack.push(x.right);
-                  if (x.left != null)
+                  if (x.left != null) {
                         stack.push(x.left);
+                  }
+                  if (x.right != null) {
+                        stack.push(x.right);
+                  }
                   return item;
             }
       }
-     */
 }
