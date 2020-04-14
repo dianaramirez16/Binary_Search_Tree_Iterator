@@ -1,4 +1,4 @@
-NewYork
+New York
 Cairo
 Toronto
 Barcelona
@@ -8,7 +8,7 @@ Rome
 Athens
 Venice
 Carson
-Los Angles
+Los Angeles
 Las Vegas
 Tokyo
 New Delhi

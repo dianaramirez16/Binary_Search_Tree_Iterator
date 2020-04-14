@@ -1,12 +1,10 @@
 import java.io.*;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Stack;
+import java.util.*;
 
 public class Iterative {
       public static void main(String[] args) throws IOException {
             BinarySearchTree<String> BST = new BinarySearchTree<>();
-         
+            ArrayList<Object> aL = new ArrayList<Object>();
             //read from file
             File file = new File("city_data.txt");
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -16,13 +14,15 @@ public class Iterative {
                   BST.insert(st);
                   //System.out.println(st );
             }
-            
+      
+            System.out.println("\nPrinting Pre-Order Traversal:");
             Iterator itr1 = BST.preorder_iterator();
             while(itr1.hasNext()) {
                   Object element = itr1.next();
                   System.out.print(element + "\n");
             }
-            
+      
+            System.out.println("\nPrinting In-Order Traversal:");
             Iterator itr2 = BST.inorder_iterator();
             while(itr2.hasNext()) {
                   Object element = itr2.next();
@@ -30,8 +30,6 @@ public class Iterative {
             }
       
             BST = new BinarySearchTree<>();
-      
-            //read from file
             File file1 = new File("city_data.txt");
             BufferedReader br1 = new BufferedReader(new FileReader(file1));
             String st1;
@@ -43,9 +41,57 @@ public class Iterative {
             Iterator itr3 = BST.postorder_iterator();
             while(itr3.hasNext()) {
                   Object element = itr3.next();
-                  System.out.print(element + " \n");
+                  aL.add(element);
+            }
+            System.out.println("\nPrinting Post-Order Traversal:");
+            for(int i=aL.size()-1; i>-1;i--){
+                  System.out.println(aL.get(i));
             }
             System.out.println();
+            
+            String search, city;
+            
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Would you like to search for a city in the list? Enter yes or no");
+            search = scan.nextLine();
+            while(search.contains("y")){
+                  System.out.println("Enter the name of the city to search for in the BST:");
+                  city = scan.nextLine();
+                  int x=0;
+                  itr1 = BST.postorder_iterator();
+                  boolean found =false;
+                  int mulResults =0;
+                  System.out.println("Using Pre-Order traversal to search...");
+                  while(itr1.hasNext()) {
+                        Object element = itr1.next();
+                        String temp = (String)element;
+                        x++;
+                        if(containsIgnoreCase(temp,city)){
+                              mulResults++;
+                              System.out.print("Found city " + element + " in position " +(19-x) + "\n");
+                              found = true;
+                              if (mulResults>1){
+                                    System.out.println("multiple results found, please enter the complete city name");
+                              }
+                        }
+                        
+                  }
+                  if (!found){
+                        System.out.println("Could not find city.");
+                  }
+                  System.out.println("Would you like to search again?");
+                  search = scan.nextLine();
+            }
+            System.out.println("thank you, come again");
+      }
+      
+      private static boolean containsIgnoreCase(String temp, String city) {
+            temp = temp.toLowerCase();
+            city = city.toLowerCase();
+            if(temp.contains(city)){
+                  return true;
+            }
+            return false;
       }
 }
 
@@ -109,7 +155,6 @@ class BinarySearchTree<Item> {
             return node;
       }
       
-      /*
       private boolean search(Node node, String city) {
             boolean found = false;
             int i = 0;
@@ -117,9 +162,9 @@ class BinarySearchTree<Item> {
             char two = city.charAt(i);
             while ((node != null) && !found) {
                   if (Character.compare(two, one) < 0) // city < node . data
-                        node = node.getLeft();
+                        node = node.left;
                   else if (Character.compare(two, one) > 0) //
-                        node = node.getRight();
+                        node = node.right;
                   else {
                         i++;
                         one = node.getData().charAt(i);
@@ -133,14 +178,12 @@ class BinarySearchTree<Item> {
             }
             return found;
       }
-      */
       
       private class Preorder implements Iterator<Item> {
             Stack<Node> stack = new Stack<Node>();
             
             public Preorder() {
                   if (root != null) stack.push(root);
-                  System.out.println("\nPrinting Pre-Order Traversal:");
             }
             public boolean hasNext() {
                   return !stack.isEmpty();
@@ -171,7 +214,7 @@ class BinarySearchTree<Item> {
                         stack.push(root);
                         root = root.left;
                   }
-                  System.out.println("\nPrinting In-Order Traversal:");
+                  
             }
             public boolean hasNext() {
                   return !stack.isEmpty();
@@ -199,7 +242,7 @@ class BinarySearchTree<Item> {
             
             public Postorder() {
                   if (root != null) stack.push(root);
-                  System.out.println("\nPrinting Post-Order Traversal:");
+                  
             }
             public boolean hasNext() {
                   return !stack.isEmpty();
